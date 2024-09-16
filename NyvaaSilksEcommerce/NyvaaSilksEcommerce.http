@@ -1,0 +1,6 @@
+@NyvaaSilksEcommerce_HostAddress = http://localhost:5226
+
+GET {{NyvaaSilksEcommerce_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
