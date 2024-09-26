@@ -12,6 +12,7 @@ import { AccountPopupComponent } from './account-popup/account-popup.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AccountService } from './account.service';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { ImageSliderComponent } from './image-slider/image-slider.component';
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgSelectModule
   ],
   providers: [AdminLibraryService,AccountService],
   bootstrap: [AppComponent]

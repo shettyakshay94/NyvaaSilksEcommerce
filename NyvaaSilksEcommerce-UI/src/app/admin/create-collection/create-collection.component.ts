@@ -1,89 +1,105 @@
 import { Component, OnInit } from '@angular/core';
-import { CollectionServiceService } from '../collection-service.service';
-
-interface Product {
-  name: string;
-  description: string;
-  imageUrl: string;
-  selected?: boolean; // Optional flag to track selection
-}
-
-interface Collection {
-  productType: string;
-  categories: string[];  // Now it's an array for multiple category selection
-  vendorName: string;
-  description: string;
-  selectedProducts: Product[];
-}
+import { AdminLibraryService } from '../../../admin-library.service';
 
 @Component({
   selector: 'app-create-collection',
   templateUrl: './create-collection.component.html',
-  styleUrl: './create-collection.component.scss'
+  styleUrls: ['./create-collection.component.scss']
 })
-// Define types for product and collection data
-
-
-export class CollectionComponent implements OnInit {
-  // Initialize necessary variables
-  productTypes: string[] = [];
-  categories: string[] = [];
-  vendors: string[] = [];
-  products: Product[] = [];
-  collection: Collection = {
+export class CreateCollectionComponent implements OnInit {
+  currentStep = 'A';
+  vendors:any[]=[];
+  productTypes = ['Saree', 'Dupatta', 'Blouse', 'Dress'];
+  categories = ['Kanjeevaram', 'Banarasi', 'Chanderi', 'Cotton'];
+  productCategories:any[]=[];
+  productType:any='';
+  products : any[] = [];
+  category:any[]=[];
+  productName: any[]=[];
+  collectionData = {
     productType: '',
-    categories: [],  // Multiple categories supported
-    vendorName: '',
+    category: '',
     description: '',
-    selectedProducts: []
+    vendorName:''
   };
-  
-  toggleStep: boolean = true; // true for Step A, false for Step B
+  constructor(private adminLibraryService: AdminLibraryService)
+  {
 
-  constructor(private collectionService: CollectionServiceService) {}
-
-  ngOnInit() {
-    this.getDropdownData();
-    this.getVendors();
+  }
+  ngOnInit(): void {
+    this.fetchdefaultValues();
   }
 
-  // Fetch product types and categories
-  getDropdownData() {
-    this.collectionService.getDropdownData().subscribe((data:any) => {
-      this.productTypes = data.productTypes;
-      this.categories = data.categories;
-    });
-  }
+  fetchdefaultValues()
+  {
+   this.adminLibraryService.getProductTypes().subscribe(
+(data)=> {
+  this.products=data;
+  this.productName=data.map(item => item.productName)
+  if (this.products.length > 0) {
+    debugger;
+    const selectedProductId = data.find(item => item.productName === this.productType).productId;
 
-  // Fetch vendors
-  getVendors() {
-    this.collectionService.getVendors().subscribe(vendors => {
-      this.vendors = vendors;
-    });
-  }
-
-  // Search for products based on query
-  searchProducts(query: string) {
-    this.collectionService.searchProducts(query).subscribe((products: Product[]) => {
-      this.products = products;
-    });
-  }
-
-  // Select or deselect a product
-  toggleProductSelection(product: Product) {
-    product.selected = !product.selected;
-
-    if (product.selected) {
-      this.collection.selectedProducts.push(product);
-    } else {
-      this.collection.selectedProducts = this.collection.selectedProducts.filter(p => p.name !== product.name);
-    }
-  }
-
-  // Submit the collection
-  submitCollection() {
-    this.collectionService.createCollection(this.collection).subscribe((response:any) => {
-      console.log(response.message);
-    });
   }
 }
+    )
+  }
+submitCollection() {}
+  toggleStep(step: string) {
+    this.currentStep = step;
+  }
+
+  onSearch() {
+   // this.adminLibraryService.getSearchDetails();
+    // Simulate fetching products from API
+    this.products = [
+      { imageName: 'product1.jpg', name: 'Product 1', description: 'Description of Product 1', selected: false },
+      { imageName: 'product2.jpg', name: 'Product 2', description: 'Description of Product 2', selected: false }
+      // Add more products as necessary
+    ];
+  }
+
+  getProductImageUrl(imageName: string) {
+    return `/assets/images/${imageName}`;  // Modify this as per your directory structure
+  }
+
+  onSubmit() {
+    // Submit collection data to API
+    console.log(this.collectionData);
+  }
+searchProducts()
+{
+
+}
+  onProductTypeChange(selected: string) {
+    const selectedProductId = this.products.find(item => item.productName === selected).productId;
+    this.loadProductCategories(selectedProductId);
+
+    if (!this.productTypes.includes(selected)) {
+      this.productTypes.push(selected);
+    }
+  }
+  loadProductCategories(productId: number) {
+    this.adminLibraryService.getProductCategory(productId).subscribe(
+      (data) => {
+        this.productCategories = data;
+        this.categories = data.map(item => item.productCategoryName);
+        if (this.categories.length > 0) {
+          this.category = this.category[0];
+        }
+      },
+      (error) => {
+        console.error('Error fetching product categories:', error);
+      }
+    );
+  }
+  onCategoryChange(selected: string) {
+    if (!this.categories.includes(selected)) {
+      this.categories.push(selected);
+    }
+  }
+  getImagePath(image: string){
+
+  }
+}
+

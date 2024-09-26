@@ -36,6 +36,17 @@ namespace NyvaaSilksEcommerce.Manager
                 return Enumerable.Empty<ProductCategory>(); // Return an empty list in case of an error.
             }
         }
+       public async Task<IEnumerable<ProductContentDetails>> SearchProducts(string ProductName, string ProductCategoryName)
+        {
+            try
+            {
+                var productDetails = await _adminRepository.SearchProducts(ProductName, ProductCategoryName);
+                return productDetails;
+            }
+            catch (Exception ex) { 
+            return Enumerable.Empty<ProductContentDetails>();
+            }
+        }
         public async Task<bool> SaveProductImage(ProductImage productImage)
         {
             try

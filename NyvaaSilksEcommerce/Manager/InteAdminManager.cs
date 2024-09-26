@@ -8,5 +8,6 @@ namespace NyvaaSilksEcommerce.Manager
         Task<IEnumerable<ProductCategory>> getProductCategory(int id);
         Task<int> SaveProductDetails(ProductDetails productDetails);
         Task<bool> SaveProductImage(ProductImage productImage);
+        Task<IEnumerable<ProductContentDetails>> SearchProducts(string ProductName, string ProductCategoryName);
     }
 }

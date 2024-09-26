@@ -2,16 +2,16 @@
 {
     public class ProductService : IProductService
     {
-        public List<Product> SearchProducts(string query)
-        {
+        //public List<Product> SearchProducts(string query)
+        //{
 
             
-            // Mock search logic or connect to database
-            return new List<Product> {
-            new Product { Name = "Saree 1", Image = "image_url", Description = "A beautiful saree." },
-            new Product { Name = "Saree 2", Image = "image_url", Description = "Another beautiful saree." }
-        };
-        }
+        //    // Mock search logic or connect to database
+        //    return new List<Product> {
+        //    new Product { Name = "Saree 1", Image = "image_url", Description = "A beautiful saree." },
+        //    new Product { Name = "Saree 2", Image = "image_url", Description = "Another beautiful saree." }
+        //};
+        //}
 
         public List<string> GetProductTypes()
         {

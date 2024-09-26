@@ -7,6 +7,7 @@ import { AdminComponent } from './admin.component';
 import { UploadContentComponent } from './upload-content/upload-content.component';
 import { AdminLibraryService } from '../../admin-library.service';
 import { CreateCollectionComponent } from './create-collection/create-collection.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CreateCollectionComponent } from './create-collection/create-collection
     CommonModule,
     FormsModule,
     AdminRoutingModule
-    ,HttpClientModule
+    ,HttpClientModule,
+    NgSelectModule
   ],
   providers: [HttpClientModule]
 })

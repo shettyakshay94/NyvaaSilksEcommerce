@@ -1,39 +1,80 @@
 <div class="collection-container">
-  <div class="toggle-section">
-    <button (click)="toggleView('A')" [class.active]="view === 'A'">Step A</button>
-    <button (click)="toggleView('B')" [class.active]="view === 'B'">Step B</button>
-  </div>
+    <div class="toggle-section">
+        <button (click)="toggleStep('A')" [class.active]="currentStep === 'A'">Search by Products</button>
+        <button (click)="toggleStep('B')" [class.active]="currentStep === 'B'">Search by Vendors</button>
+    </div>
 
-  <div *ngIf="toggleStep">
-    <!-- Step A Form -->
-    <form (ngSubmit)="submitCollection()">
-      <label>Product Type:</label>
-      <input [(ngModel)]="collection.productType" name="productType" list="productTypes" />
-      <datalist id="productTypes">
-        <option *ngFor="let type of productTypes">{{ type }}</option>
-      </datalist>
-  
-      <label>Category (Multi-select):</label>
-      <select [(ngModel)]="collection.categories" name="categories" multiple>
-        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-      </select>
-  
-      <label>Search Products:</label>
-      <input type="text" (input)="searchProducts($event.target.value)" />
-  
-      <div class="product-grid">
-        <div *ngFor="let product of products" (click)="toggleProductSelection(product)">
-          <img [src]="product.imageUrl" alt="Product Image" />
-          <div>{{ product.name }}</div>
-          <div>{{ product.description }}</div>
-          <input type="checkbox" [checked]="product.selected" />
+    <form class="step-form">
+        <div *ngIf="currentStep === 'A'">
+            <!-- First Row: Centered in One Line -->
+            <div class="filter-row">
+                <label for="productType">Product Type:</label>
+                <ng-select [(ngModel)]="productType" [items]="productName" name="productType"
+                           (ngModelChange)="onProductTypeChange($event)" [searchable]="true" [addTag]="true">
+                </ng-select>
+
+                <label for="category">Category:</label>
+                <ng-select [(ngModel)]="category" [items]="categories" name="category"
+                           (ngModelChange)="onCategoryChange($event)" [searchable]="true" [addTag]="true">
+                </ng-select>
+
+                <button type="button" (click)="onSearch()">Search</button>
+            </div>
+
+            <!-- Second Row: Images Section -->
+            <div *ngIf="products.length > 0" class="product-grid">
+                <div *ngFor="let product of products" class="product-card">
+                    <img [src]="getProductImageUrl(product.imageName)" alt="{{ product.name }}">
+                    <h4>{{ product.name }}</h4>
+                    <p>{{ product.description }}</p>
+                    <input type="checkbox" [(ngModel)]="product.selected"> Select
+                </div>
+            </div>
+
+            <!-- Third Row: Collection Description -->
+            <div class="description-section">
+                <label for="collectionDescription">Collection Description:</label>
+                <textarea [(ngModel)]="collectionData.description" name="description" placeholder="Enter collection description"></textarea>
+            </div>
+
+            <!-- Fourth Row: Submit Button -->
+            <div class="submit-section">
+                <button type="submit" (click)="onSubmit()">Submit</button>
+            </div>
         </div>
-      </div>
-  
-      <label>Description:</label>
-      <textarea [(ngModel)]="collection.description" name="description"></textarea>
-  
-      <button type="submit">Submit</button>
+
+        <!-- Step B Form -->
+        <div *ngIf="currentStep === 'B'" class="step-form">
+            <h2>Create Collection - Step B</h2>
+            <form (ngSubmit)="submitCollection()">
+                <div>
+                    <label for="vendorName">Vendor Name</label>
+                    <ng-select [(ngModel)]="collectionData.vendorName" [items]="vendors" name="vendorName" [searchable]="true" [addTag]="true">
+                        <ng-template ng-option-tmp let-item="item">
+                            {{ item }}
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <div>
+                    <button type="button" (click)="searchProducts()">Search</button>
+                </div>
+
+                <div class="product-grid">
+                    <div *ngFor="let product of products" class="product-card">
+                        <img [src]="getImagePath(product.imageName)" alt="{{ product.name }}">
+                        <h4>{{ product.name }}</h4>
+                        <p>{{ product.description }}</p>
+                        <input type="checkbox" [(ngModel)]="product.selected" name="selected">
+                    </div>
+                </div>
+
+                <div>
+                    <textarea [(ngModel)]="collectionData.description" name="description" placeholder="Enter collection description"></textarea>
+                </div>
+                <div class="submit-section">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
     </form>
-  </div>
-</div>  
+</div>

@@ -32,7 +32,28 @@ namespace NyvaaSilksEcommerce.Repositories
             return productTypes;
         }
 
+        public async Task<IEnumerable<ProductContentDetails>> SearchProducts(string ProductName, string ProductCategoryName)
+        {
+            string ProductContentQuery = "Select pd.ProductName , pd.ProductDescription,pi.ImageName from Products pd" +
+                " Inner join ProductImages pi on pi.ProductsId=pd.Id Inner join ProductCategory pc on pc.ProductID=pd.ProductId Inner join ProductType pt on pt.ProductId=pc.ProductID" +
+                "where pt.ProductName=" + ProductName + "AND pc.ProductCategoryName=" + ProductCategoryName;
+            var productContent = new List<ProductContentDetails>();
 
+            using (var reader = await _databaseHelper.ExecuteQueryAsync(ProductContentQuery))
+            {
+                while (await reader.ReadAsync())
+                {
+                    var product = new ProductContentDetails
+                    {
+                        ProductName = reader["ProductName"].ToString(),
+                        ProductDescription = reader["ProductDescription"].ToString(),
+                        ImageName = reader["ImageName"].ToString()
+                    };
+                    productContent.Add(product);
+                }
+            }
+            return productContent;
+        }
         public async Task<IEnumerable<ProductCategory>> getProductCategoryFromRepository(int id)
         {
             string ProductTypeQuery = "SELECT ProductCategoryId,ProductCategoryName FROM ProductCategory where ProductID = @ProductID";
