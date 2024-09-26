@@ -4,7 +4,7 @@ using NyvaaSilksEcommerce.Helpers;
 using NyvaaSilksEcommerce.Models;
 using NyvaaSilksEcommerce.Services;
 
-namespace YourNamespace.Controllers
+namespace NyvaaSilksEcommerce.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

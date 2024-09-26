@@ -1,0 +1,39 @@
+<div class="collection-container">
+  <div class="toggle-section">
+    <button (click)="toggleView('A')" [class.active]="view === 'A'">Step A</button>
+    <button (click)="toggleView('B')" [class.active]="view === 'B'">Step B</button>
+  </div>
+
+  <div *ngIf="toggleStep">
+    <!-- Step A Form -->
+    <form (ngSubmit)="submitCollection()">
+      <label>Product Type:</label>
+      <input [(ngModel)]="collection.productType" name="productType" list="productTypes" />
+      <datalist id="productTypes">
+        <option *ngFor="let type of productTypes">{{ type }}</option>
+      </datalist>
+  
+      <label>Category (Multi-select):</label>
+      <select [(ngModel)]="collection.categories" name="categories" multiple>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+  
+      <label>Search Products:</label>
+      <input type="text" (input)="searchProducts($event.target.value)" />
+  
+      <div class="product-grid">
+        <div *ngFor="let product of products" (click)="toggleProductSelection(product)">
+          <img [src]="product.imageUrl" alt="Product Image" />
+          <div>{{ product.name }}</div>
+          <div>{{ product.description }}</div>
+          <input type="checkbox" [checked]="product.selected" />
+        </div>
+      </div>
+  
+      <label>Description:</label>
+      <textarea [(ngModel)]="collection.description" name="description"></textarea>
+  
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>  

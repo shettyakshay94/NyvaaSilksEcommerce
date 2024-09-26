@@ -22,11 +22,14 @@ namespace NyvaaSilksEcommerce.DataAccess
             }
         }
 
-        public async Task<SqlDataReader> ExecuteQueryAsync(string query, SqlParameter[] parameters)
+        public async Task<SqlDataReader> ExecuteQueryAsync(string query, SqlParameter[] parameters=null)
         {
             SqlConnection conn = new SqlConnection(_connectionString);
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddRange(parameters);
+            if (parameters != null)
+            {
+                cmd.Parameters.AddRange(parameters);
+            }
             await conn.OpenAsync();
             return await cmd.ExecuteReaderAsync(System.Data.CommandBehavior.CloseConnection);
         }

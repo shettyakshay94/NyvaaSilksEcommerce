@@ -1,0 +1,47 @@
+<div class="modal" *ngIf="isOpen">
+  <div class="modal-content">
+    <span class="close" (click)="close()">&times;</span>
+    
+    <div class="offer-banner">
+      <img src="assets/signup.png" alt="Offer Image" class="offer-image"/>
+    </div>
+
+    <div class="form-section">
+      <h2><span class="login-link" (click)="selectTab('login')">Login</span> or <span class="signup-link" (click)="selectTab('register')">Signup</span></h2>
+
+      <div *ngIf="activeTab === 'login'">
+        <form (ngSubmit)="onLogin()">
+          <div class="input-group">
+            <label for="mobileNumber">+91</label>
+            <input type="tel" id="mobileNumber" [(ngModel)]="mobileNumber" name="mobileNumber" placeholder="Mobile Number" required />
+          </div>
+
+          <p class="terms">
+            By continuing, you agree to the <a href="#">Terms of Use</a> & <a href="#">Privacy Policy</a>.
+          </p>
+
+          <button type="submit" class="btn-continue">Continue</button>
+        </form>
+      </div>
+
+      <div *ngIf="activeTab === 'register'">
+        <form (ngSubmit)="onRegister()">
+          <div class="input-group">
+            <label for="mobileNumber">+91</label>
+            <input type="tel" id="mobileNumber" [(ngModel)]="mobileNumber" name="mobileNumber" placeholder="Mobile Number" required />
+          </div>
+
+          <p class="terms">
+            By continuing, you agree to the <a href="#">Terms of Use</a> & <a href="#">Privacy Policy</a>.
+          </p>
+
+          <button type="submit" class="btn-continue">Continue</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="help-section">
+      <p>Having trouble logging in? <a href="#">Get help</a></p>
+    </div>
+  </div>
+</div>

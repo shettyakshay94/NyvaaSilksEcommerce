@@ -1,0 +1,132 @@
+.container {
+    padding: 20px;
+    background-color: #f5f3e9; /* Light background */
+  }
+  
+  .whats-new, .category-types, .about-us {
+    margin-bottom: 50px; /* Add space between sections */
+    padding: 30px;
+    text-align: center; /* Center the section headings */
+    background-color: #fdf6e4; /* Light beige background for each section */
+    border-radius: 10px; /* Rounded corners for a smoother design */
+  }
+  
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #6b4e31; /* Darker color for the section headings */
+    margin-bottom: 20px;
+  }
+  
+  /* Adjusting the grid for products */
+  .new-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Create a responsive grid with at least 200px wide columns */
+    gap: 20px; /* Space between product cards */
+  }
+  
+  .product-card {
+    background-color: #fff; /* White background for cards */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.05); /* Slight zoom effect on hover */
+    }
+  }
+  
+  .product-card img {
+    width: 100%; /* Make images fill the card */
+    border-radius: 8px; /* Rounded corners for images */
+    margin-bottom: 10px;
+  }
+  
+  .product-card p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #4f4f4f; /* Darker color for product name */
+    margin-top: 10px;
+  }
+  
+  /* Grid for categories */
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Create a responsive grid with at least 200px wide columns */
+    gap: 20px; /* Space between category cards */
+  }
+  
+  .category-card {
+    background-color: #fff; /* White background for cards */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.05); /* Slight zoom effect on hover */
+    }
+  }
+  
+  .category-card img {
+    width: 100%; /* Make images fill the card */
+    border-radius: 8px; /* Rounded corners for images */
+    margin-bottom: 10px;
+  }
+  
+  .category-card p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #6b4e31; /* Darker color for category name */
+    margin-top: 10px;
+  }
+  
+  .subcategories {
+    background-color: #fdf6e4;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .subcategories ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .subcategories li {
+    padding: 5px 0;
+    font-size: 14px;
+    color: #4f4f4f; /* Slightly darker color for subcategories */
+  }
+  
+  .about-us {
+    background-color: #f9f9f7;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+  }
+  
+  .about-us p {
+    font-size: 16px;
+    color: #4f4f4f;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 768px) {
+    .new-products, .categories-grid {
+      grid-template-columns: 1fr; /* Switch to single column layout on smaller screens */
+    }
+  
+    .product-card, .category-card {
+      padding: 10px;
+    }
+  
+    .about-us p {
+      font-size: 14px;
+    }
+  }
+  

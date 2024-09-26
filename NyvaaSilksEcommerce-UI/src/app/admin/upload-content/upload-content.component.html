@@ -1,0 +1,53 @@
+<div class="upload-content">
+    <form (ngSubmit)="onSubmit()" #uploadForm="ngForm">
+  
+      <!-- Product Type Dropdown -->
+      <div class="form-group">
+        <label for="productType">Product Type</label>
+        <select id="productType" name="productType" [(ngModel)]="productType" required>
+          <option *ngFor="let type of productTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+  
+      <!-- Product Category Dropdown -->
+      <div class="form-group">
+        <label for="productCategory">Product Category</label>
+        <select id="productCategory" name="productCategory" [(ngModel)]="productCategory" required>
+          <option *ngFor="let category of productCategories" [value]="category">{{ category }}</option>
+        </select>
+      </div>
+  
+      <!-- Product Name Textbox -->
+      <div class="form-group">
+        <label for="productName">Product Name</label>
+        <input id="productName" name="productName" type="text" [(ngModel)]="productName" required />
+      </div>
+  
+      <!-- Description Textbox -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" [(ngModel)]="description" rows="5" required></textarea>
+      </div>
+     <!-- Product Amount-->
+      <div class="form-group">
+        <label for="description">Product Amount</label>
+        <input id="productAmount" name="productAmount" type="text" [(ngModel)]="productAmount" required />
+      </div>
+  
+      <!-- Upload Images Button -->
+      <div class="form-group">
+        <label for="fileUpload">Upload Images</label>
+        <input id="fileUpload" type="file" (change)="onFileChange($event)" multiple />
+        <div *ngIf="imagePreviews.length > 0" class="image-preview">
+          <img *ngFor="let img of imagePreviews" [src]="img" alt="Image Preview" />
+        </div>
+      </div>
+  
+      <!-- Preview Button -->
+      <button type="button" (click)="onPreview()">Preview</button>
+  
+      <!-- Publish Button -->
+      <button type="submit" (click)="onPublish()">Publish</button>
+    </form>
+  </div>
+  

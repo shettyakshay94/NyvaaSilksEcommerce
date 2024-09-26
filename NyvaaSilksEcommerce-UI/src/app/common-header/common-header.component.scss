@@ -1,0 +1,292 @@
+/* Common Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: beige;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: 'Georgia', serif;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+}
+
+.search-bar {
+  flex: 1;
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.search-bar input {
+  border: none;
+  background: none;
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.search-bar input:focus {
+  outline: none;
+}
+
+.search-bar button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: #5a3e36;
+}
+
+.search-bar button:hover {
+  color: gold;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+}
+
+.header-icons .icon-link {
+  color: #5a3e36;
+  text-decoration: none;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+}
+
+.header-icons .icon-link i {
+  font-size: 18px;
+}
+
+.header-icons .icon-link span {
+  margin-top: 5px;
+}
+
+.header-icons .icon-link:hover {
+  color: gold;
+}
+
+/* Adjusted Submenu Styling */
+.nav-menu {
+  background-color: beige;
+  padding: 10px 0;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: 'Georgia', serif;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      position: relative;
+      margin: 0 20px;
+
+      a {
+        text-decoration: none;
+        color: #5a3e36;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px;
+        transition: color 0.3s ease;
+      }
+
+      a:hover {
+        color: gold;
+      }
+
+      /* Submenu */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 29px; /* Position the submenu just below the parent */
+        left: 50%; /* Start at the center of the parent */
+        transform: translateX(-50%); /* Shift the dropdown to center-align */
+        background-color: white;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+        z-index: 1000;
+        min-width: 160px;
+        padding: 0;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        text-align: left;
+
+        li {
+          padding: 10px;
+          list-style: none;
+
+          a {
+            display: block;
+            text-decoration: none;
+            color: #5a3e36;
+            padding: 10px;
+            font-size: 14px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+          }
+
+          a:hover {
+            color: gold;
+            background-color: #f1f1f1; /* Subtle hover background */
+          }
+        }
+      }
+
+      /* Show submenu on hover */
+      &:hover .dropdown-content {
+        display: block;
+      }
+    }
+  }
+}
+
+/* Responsive Styling for Submenus */
+@media screen and (max-width: 768px) {
+  .nav-menu ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-menu li {
+    margin: 10px 0;
+  }
+
+  .dropdown-content {
+    top: 50px; /* Adjust for better spacing on mobile */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+
+
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
+  .search-bar {
+    margin: 0 10px;
+  }
+
+  .header-icons .icon-link {
+    font-size: 10px;
+  }
+
+  .header-icons .icon-link i {
+    font-size: 16px;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+  }
+
+  .nav-menu li {
+    margin: 0 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-container {
+    margin-bottom: 10px;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .header-icons {
+    margin-bottom: 10px;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-menu li {
+    margin: 10px 0;
+  }
+}
+
+/* Modal Styling (Account Popup) */
+.account-popup {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  width: 300px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+.account-popup.open {
+  display: block;
+}
+
+.account-popup header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account-popup header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #5a3e36;
+}
+
+.account-popup header button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.account-popup form {
+  margin-top: 20px;
+}
+
+.account-popup form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.account-popup form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #5a3e36;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.account-popup form button:hover {
+  background-color: gold;
+}

@@ -1,0 +1,8 @@
+<div class="slider">
+    <div class="slides" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+      <div class="slide" *ngFor="let image of images; let i = index">
+        <img [src]="image" [class.zoom-out]="i === currentSlide">
+      </div>
+    </div>
+  </div>
+  

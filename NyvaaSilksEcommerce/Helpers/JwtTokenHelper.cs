@@ -22,6 +22,8 @@ namespace NyvaaSilksEcommerce.Helpers
                     new Claim(ClaimTypes.Role, user.IsAdmin ? "Admin" : "User")
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
+                Issuer = "NyvaaSilks", // Ensure this matches the issuer configured in `appsettings.json`
+
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

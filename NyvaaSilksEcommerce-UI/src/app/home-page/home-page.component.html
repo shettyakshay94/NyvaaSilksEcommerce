@@ -1,0 +1,46 @@
+<div class="container">
+    <!-- What's New Section -->
+    <section class="whats-new">
+      <h2>What's New</h2>
+      <div class="new-products">
+        <div class="product-card" *ngFor="let product of newProducts">
+          <img [src]="product.imageUrl" alt="Product Image" />
+          <p>{{ product.name }}</p>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Category Types Section -->
+    <section class="category-types">
+      <h2>Categories</h2>
+      <div class="categories-grid">
+        <div
+          class="category-card"
+          *ngFor="let category of categories"
+          (mouseover)="showSubcategories(category)"
+          (mouseleave)="hideSubcategories()"
+        >
+          <img [src]="category.imageUrl" alt="{{ category.name }}" />
+          <p>{{ category.name }}</p>
+          <div class="subcategories" *ngIf="hoveredCategory === category">
+            <ul>
+              <li *ngFor="let subcategory of category.subcategories">
+                {{ subcategory.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- About Us Section -->
+    <section class="about-us">
+      <h2>About Us</h2>
+      <p>
+        Welcome to Nyvaa Silks! We bring you the finest collection of silk sarees,
+        dresses, and traditional wear that blends elegance with modern styles.
+        Explore our range of timeless pieces designed to make you stand out.
+      </p>
+    </section>
+  </div>
+  
