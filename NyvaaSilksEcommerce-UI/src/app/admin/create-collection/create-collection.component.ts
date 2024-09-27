@@ -14,7 +14,7 @@ export class CreateCollectionComponent implements OnInit {
   productCategories:any[]=[];
   productType:any='';
   products : any[] = [];
-  category:any[]=[];
+  category:any;
   productName: any[]=[];
   collectionData = {
     productType: '',
@@ -50,17 +50,19 @@ submitCollection() {}
   }
 
   onSearch() {
-   // this.adminLibraryService.getSearchDetails();
+    this.adminLibraryService.getSearchDetails(this.productType,this.category).subscribe((data:any)=>{
+      this.products = [
+        { imageName: 'product1.jpg', name: 'Product 1', description: 'Description of Product 1', selected: false },
+        { imageName: 'product2.jpg', name: 'Product 2', description: 'Description of Product 2', selected: false }
+        // Add more products as necessary
+      ];
+    });
     // Simulate fetching products from API
-    this.products = [
-      { imageName: 'product1.jpg', name: 'Product 1', description: 'Description of Product 1', selected: false },
-      { imageName: 'product2.jpg', name: 'Product 2', description: 'Description of Product 2', selected: false }
-      // Add more products as necessary
-    ];
+   
   }
 
   getProductImageUrl(imageName: string) {
-    return `/assets/images/${imageName}`;  // Modify this as per your directory structure
+    return `C:/Users/DELL/source/repos/Images/Products/${imageName}`;  // Modify this as per your directory structure
   }
 
   onSubmit() {

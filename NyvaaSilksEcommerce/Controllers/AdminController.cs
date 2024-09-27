@@ -29,10 +29,12 @@ namespace NyvaaSilksEcommerce.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet("products/search")]
-        public IActionResult SearchProducts(string ProductName, string ProductCategoryName)
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchProducts([FromQuery] string ProductName, [FromQuery] string ProductCategoryName)
         {
-            var products = _adminManager.SearchProducts(ProductName, ProductCategoryName);
+            Console.WriteLine($"ProductName: {ProductName}, ProductCategoryName: {ProductCategoryName}");
+
+            var products = await _adminManager.SearchProducts(ProductName, ProductCategoryName);
             return Ok(products);
         }
         //[Authorize(Roles = "Admin")]

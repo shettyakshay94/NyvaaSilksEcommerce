@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 
 
 @Injectable({
@@ -15,6 +15,21 @@ export class AdminLibraryService {
   getProductTypes(): Observable<any[]> {
     return this.http.get<any[]>(this.apigetProductUrl);
   }
+  getSearchDetails(productName: string, productCategoryName: string) {
+    let params = new HttpParams()
+      .set('ProductName', encodeURIComponent(productName))
+      .set('ProductCategoryName', encodeURIComponent(productCategoryName));
+
+    return this.http.get<any[]>(`${this.apiUrl}/search`, { params })
+      .pipe(
+        catchError(error => {
+          console.error('Error occurred:', error);
+          return throwError(error);
+        })
+      );
+}
+  
+  
   getProductCategory(id:any): Observable<any[]> {
     return this.http.get<any[]>(this.apigetProductCategoryUrl+id)
   }

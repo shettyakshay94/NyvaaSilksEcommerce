@@ -34,9 +34,9 @@ namespace NyvaaSilksEcommerce.Repositories
 
         public async Task<IEnumerable<ProductContentDetails>> SearchProducts(string ProductName, string ProductCategoryName)
         {
-            string ProductContentQuery = "Select pd.ProductName , pd.ProductDescription,pi.ImageName from Products pd" +
-                " Inner join ProductImages pi on pi.ProductsId=pd.Id Inner join ProductCategory pc on pc.ProductID=pd.ProductId Inner join ProductType pt on pt.ProductId=pc.ProductID" +
-                "where pt.ProductName=" + ProductName + "AND pc.ProductCategoryName=" + ProductCategoryName;
+            string ProductContentQuery = "Select pd.ProductName , pd.ProductDescription,pi.ImageName from Products pd " +
+                " Inner join ProductImages pi on pi.ProductsId=pd.Id Inner join ProductCategory pc on pc.ProductID=pd.ProductId Inner join ProductType pt on pt.ProductId=pc.ProductID " +
+                " where pt.ProductName= '" + ProductName + "' AND pc.ProductCategoryName= '" + ProductCategoryName+"'";
             var productContent = new List<ProductContentDetails>();
 
             using (var reader = await _databaseHelper.ExecuteQueryAsync(ProductContentQuery))
